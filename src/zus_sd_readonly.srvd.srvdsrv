@@ -1,0 +1,7 @@
+@EndUserText.label: 'Read Only App Service Definition'
+define service ZUS_SD_ReadOnly {
+  expose ZUS_I_SO;
+  expose ZUS_I_SOIT;
+  expose ZUS_I_CUST;
+  expose ZUS_I_PROD;
+}

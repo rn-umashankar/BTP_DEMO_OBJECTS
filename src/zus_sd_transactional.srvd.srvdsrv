@@ -1,0 +1,7 @@
+@EndUserText.label: 'Transactional App Service Definition'
+define service ZUS_SD_Transactional {
+  expose ZUS_RC_SO;
+  expose ZUS_RC_SOIT;
+  expose ZUS_I_CUST;
+  expose ZUS_I_PROD;
+}

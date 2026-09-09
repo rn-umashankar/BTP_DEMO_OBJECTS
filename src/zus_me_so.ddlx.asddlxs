@@ -1,0 +1,83 @@
+@Metadata.layer: #CUSTOMER
+
+@UI.headerInfo: 
+{ 
+    typeName: 'Sales Order',
+    typeNamePlural: 'Sales Orders',
+   
+    title:
+    {
+        type: #STANDARD,
+        label: 'ORDERS',
+        criticalityRepresentation: #WITHOUT_ICON,
+        value: 'Soid'
+    },
+    
+    description  :
+    { 
+        type: #STANDARD,
+        label: 'CUSTOMERS',
+        criticalityRepresentation: #WITHOUT_ICON,
+        value: 'Buyer'        
+    }
+} 
+annotate entity ZUS_I_SO
+    with 
+{
+
+@UI.facet: [
+{  
+    id: 'Ord',
+    purpose: #STANDARD,
+    position: 10,
+    label: 'Order Details',
+    type: #IDENTIFICATION_REFERENCE
+    
+    
+}
+]
+
+@UI.lineItem: [{ position: 10, label: 'Order No' }]
+@UI.identification: [{ position: 10, label: 'Order No' }]
+@UI.selectionField: [{ position: 1 }]
+@EndUserText.label: 'Order ID'
+Soid;
+
+@UI.lineItem: [{ position: 20, label: 'Buyer' }]
+@UI.identification: [{ position: 20, label: 'Buyer' }]
+Buyer;
+
+@UI.lineItem: [{ position: 30, label: 'Sales Agent' }]
+@UI.identification: [{ position: 30, label: 'Sales Agent' }]
+@UI.selectionField: [{ position: 3 }]
+@EndUserText.label: 'Sales Agent'
+SalesPerson;
+
+@UI.lineItem: [{ position: 40, label: 'Sales Time' }]
+@UI.identification: [{ position: 40, label: 'Sales Time' }]
+SalesTimestamp;
+
+@UI.lineItem: [{ position: 50, label: 'Sales Manager' }]
+@UI.identification: [{ position: 50, label: 'Sales Manager' }]
+SalesManager;
+
+@UI.lineItem: [{ position: 60, label: 'Approval Time' }]
+@UI.identification: [{ position: 60, label: 'Approval Time' }]
+ApprovalTimestamp;
+
+@UI.lineItem: [{ position: 70, label: 'System User' }]
+@UI.identification: [{ position: 70, label: 'System User' }]
+@UI.selectionField: [{ position: 2 }]
+@EndUserText.label: 'System User'
+CreatedBy;
+
+@UI.lineItem: [{ position: 80, label: 'System Time' }]
+@UI.identification: [{ position: 80, label: 'System Time' }]
+CreatedOn;
+
+@UI.lineItem: [{ position: 110, label: 'URL' }]
+@UI.identification: [{ position: 110, label: 'URL' }]
+Url;
+
+
+}

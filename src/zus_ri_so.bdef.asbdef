@@ -1,0 +1,64 @@
+managed implementation in class zbp_us_ri_so unique;
+strict ( 2 );
+
+define behavior for zus_RI_SO //alias <alias_name>
+persistent table zvkfeb01_dt_so
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly : update ) Soid;
+  field ( mandatory : create ) Buyer;
+  association _Item { create; }
+
+  validation validatesalesdats on save { field ApprovalTimestamp; create; }
+
+mapping for zvkfeb01_dt_so
+{
+
+    Soid  =   Soid;
+    Buyer = buyer;
+    SalesPerson       = sales_person;
+    SalesTimestamp    = sales_timestamp;
+    SalesManager      = sales_manager;
+    ApprovalTimestamp = approval_timestamp;
+    CreatedBy = created_by;
+    CreatedOn = created_on;
+    ChangedBy = changed_by;
+    ChangedOn = changed_on;
+    Url       = url;
+
+}
+}
+
+define behavior for ZUS_IE_SOIT //alias <alias_name>
+persistent table zvkfeb01_dt_soit
+lock dependent by _Header
+authorization dependent by _Header
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) Soid, ItemId;
+  association _Header;
+
+  mapping for zvkfeb01_dt_soit
+  {
+
+    Soid                =   soid ;
+    ItemId              =   item_id  ;
+    Product             =   product ;
+    Amount              =   amount ;
+    Currency            =   currency ;
+    SalesPerson         =   sales_person ;
+    SalesTimestamp      =   sales_timestamp ;
+    SalesManager        =   sales_manager ;
+    ApprovalTimestamp   =   approval_timestamp ;
+    ChangedBy           =   changed_by ;
+    ChangedOn           =   changed_on ;
+
+  }
+}
