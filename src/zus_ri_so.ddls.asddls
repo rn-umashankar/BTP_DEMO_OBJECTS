@@ -17,6 +17,10 @@ association [1..1] to ZUS_I_CUST as _Cust
     created_by as CreatedBy,
     created_on as CreatedOn,
     changed_by as ChangedBy,
+    
+    @Semantics.systemDateTime.lastChangedAt: true 
+    @Semantics.systemDateTime.localInstanceLastChangedAt: true
+    
     changed_on as ChangedOn,
     url as Url,
     _Item,

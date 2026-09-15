@@ -1,13 +1,24 @@
 projection;
 strict ( 2 );
 
+use draft;
+
 define behavior for ZUS_RC_SO //alias <alias_name>
+use etag
 {
   use create;
   use update;
   use delete;
 
   use association _Item { create; }
+
+  use action Edit;
+  use action Prepare;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+
+  use action customaction;
 }
 
 define behavior for ZUS_RC_SOIT //alias <alias_name>

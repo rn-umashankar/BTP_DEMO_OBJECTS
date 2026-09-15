@@ -79,8 +79,11 @@ SalesPerson;
 @UI.identification: [{ position: 40, label: 'Sales Time' }]
 SalesTimestamp;
 
-@UI.lineItem: [{ position: 50, label: 'Sales Manager' }]
-@UI.identification: [{ position: 50, label: 'Sales Manager' }]
+@UI.lineItem: [{ position: 50, label: 'Sales Manager' },
+{ type : #FOR_ACTION, dataAction: 'customaction' , label: 'Action Button'}]
+
+@UI.identification: [{ position: 50, label: 'Sales Manager' },
+{ type : #FOR_ACTION, dataAction: 'customaction' , label: 'Action Button'}]
 SalesManager;
 
 @UI.lineItem: [{ position: 60, label: 'Approval Time' }]

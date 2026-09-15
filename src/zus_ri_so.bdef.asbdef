@@ -1,20 +1,38 @@
 managed implementation in class zbp_us_ri_so unique;
 strict ( 2 );
 
+with draft;
+
 define behavior for zus_RI_SO //alias <alias_name>
 persistent table zvkfeb01_dt_so
-lock master
+draft table zvkfeb01_dtf_so
+lock master total etag ChangedOn
 authorization master ( instance )
-//etag master <field_name>
+etag master changedOn
 {
   create ( authorization : global );
   update;
   delete;
+
   field ( readonly : update ) Soid;
-  field ( mandatory : create ) Buyer;
+  field ( readonly ) ApprovalTimestamp;
+  field ( mandatory : create ) Buyer; //: create
   association _Item { create; }
 
-  validation validatesalesdats on save { field ApprovalTimestamp; create; }
+  validation validatesalesdats on save { field ApprovalTimestamp;  create; }
+
+//  validation setbuyer on save  { field Buyer; create; }
+
+  determination determineappdata on save { field SalesTimestamp ; }
+
+   draft action Activate;
+   draft action Resume;
+   draft action Edit;
+   draft action Discard;
+
+   draft determine action Prepare;
+
+    action  ( features : instance ) customaction result[1]$self;
 
 mapping for zvkfeb01_dt_so
 {
@@ -36,6 +54,7 @@ mapping for zvkfeb01_dt_so
 
 define behavior for ZUS_IE_SOIT //alias <alias_name>
 persistent table zvkfeb01_dt_soit
+draft table zvkfeb01_dtf_soi
 lock dependent by _Header
 authorization dependent by _Header
 //etag master <field_name>
