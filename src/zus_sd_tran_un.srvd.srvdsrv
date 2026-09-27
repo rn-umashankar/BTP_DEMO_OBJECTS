@@ -1,0 +1,7 @@
+@EndUserText.label: 'Transactional App Service Definition Unmanagaed'
+define service ZUS_SD_Tran_Un {
+  expose ZUS_RC_SOU;
+  expose ZUS_RC_SOITU;
+  expose ZUS_I_PROD;
+  expose ZUS_I_CUST;
+}

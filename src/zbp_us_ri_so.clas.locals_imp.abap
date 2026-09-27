@@ -15,8 +15,8 @@ CLASS lhc_zus_RI_SO DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS customaction FOR MODIFY
       keys FOR ACTION zus_RI_SO~customaction RESULT result.
-*    METHODS setbuyer FOR VALIDATE ON SAVE
-*      keys FOR zus_RI_SO~setbuyer.
+    METHODS setbuyer FOR DETERMINE ON SAVE
+      keys FOR zus_RI_SO~setbuyer.
 
 ENDCLASS.
 
@@ -123,20 +123,31 @@ CLASS lhc_zus_RI_SO IMPLEMENTATION.
                        ).
   ENDMETHOD.
 
-*  METHOD setbuyer.
-*    READ ENTITIES OF zus_ri_so IN LOCAL MODE
-*        ENTITY zus_ri_so
-*        FIELDS ( Buyer )
-*        WITH CORRESPONDING #(  keys )
-*        RESULT DATA(li_output).
-*
-*    MODIFY ENTITIES OF zus_ri_so IN LOCAL MODE
-*        ENTITY zus_ri_so
-*        UPDATE FIELDS ( Buyer )
-*        WITH VALUE #( FOR ls_output IN li_output
-*                        ( %key = ls_output-%key Buyer = sy-uname )
-*
-*                     )  .
-*  ENDMETHOD.
+  METHOD setbuyer.
+    READ ENTITIES OF zus_ri_so IN LOCAL MODE
+        ENTITY zus_ri_so
+        FIELDS ( Buyer )
+        WITH CORRESPONDING #(  keys )
+        RESULT DATA(li_output).
+
+    LOOP AT li_output INTO DATA(ls_output).
+
+        data(lv_buyer) = '55662424' .
+        MODIFY ENTITIES OF zus_ri_so IN LOCAL MODE
+            ENTITY zus_ri_so
+            UPDATE FIELDS ( Buyer )
+            WITH VALUE #(
+                        ( %key = ls_output-%key ApprovalTimestamp = lv_buyer )
+                        ).
+
+*        MODIFY ENTITIES OF zus_ri_so IN LOCAL MODE
+*            ENTITY zus_ri_so
+*            UPDATE FIELDS ( Buyer )
+*            WITH VALUE #( FOR ls_output IN li_output
+*                            ( %key = ls_output-%key Buyer = sy-uname )
+
+*                         )  .
+    ENDLOOP.
+  ENDMETHOD.
 
 ENDCLASS.

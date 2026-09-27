@@ -1,40 +1,17 @@
-managed implementation in class zbp_us_ri_so unique;
+unmanaged implementation in class zbp_us_ri_sou unique;
 strict ( 2 );
 
-with draft;
-
-define behavior for zus_RI_SO //alias <alias_name>
-persistent table zvkfeb01_dt_so
-draft table zvkfeb01_dtf_so
-lock master total etag ChangedOn
+define behavior for ZUS_RI_SOU //alias <alias_name>
+//late numbering
+lock master
 authorization master ( instance )
-etag master changedOn
+//etag master <field_name>
 {
   create ( authorization : global );
   update;
   delete;
-
-  field ( readonly : update ) Soid;
-  field ( readonly ) ApprovalTimestamp;
-  field ( mandatory : create ) Buyer; //: create
+  field ( readonly ) Soid;
   association _Item { create; }
-
-  validation validatesalesdats on save { field ApprovalTimestamp;  create; }
-
-//  validation setbuyer on save  { field Buyer; create; }
-
-  determination setbuyer on save { field Buyer; create; }
-
-  determination determineappdata on save { field SalesTimestamp ; }
-
-   draft action Activate;
-   draft action Resume;
-   draft action Edit;
-   draft action Discard;
-
-   draft determine action Prepare;
-
-    action  ( features : instance ) customaction result[1]$self;
 
 mapping for zvkfeb01_dt_so
 {
@@ -52,11 +29,11 @@ mapping for zvkfeb01_dt_so
     Url       = url;
 
 }
+
 }
 
-define behavior for ZUS_IE_SOIT //alias <alias_name>
-persistent table zvkfeb01_dt_soit
-draft table zvkfeb01_dtf_soi
+define behavior for ZUS_IE_SOITU //alias <alias_name>
+//late numbering
 lock dependent by _Header
 authorization dependent by _Header
 //etag master <field_name>
@@ -82,4 +59,5 @@ authorization dependent by _Header
     ChangedOn           =   changed_on ;
 
   }
+
 }
